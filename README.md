@@ -1,5 +1,5 @@
 
-<font size=10>  Modelling Chess Player Performances</font>
+## Modelling Chess Player Performances
 
 <font size=5> Comparing Performance of Anand Viswanathan and Magnus Carlsen:</font>
 
