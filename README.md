@@ -13,7 +13,9 @@ Considering μ as the population mean, we can model the mean ACPL of Anand, Vish
 The distribution of the three variables are assumed as follows:
 
 μ ~ N(μ_0,1/ζ_0)
+
 δ ~ N(δ_0,1/γ_0)
+
 ζ ~ Gamma(a_0,b_0)
 
 Considering that the average ACPL score of the entire dataset containing all players is 20.22, we can keep μ_0 = 20. To keep the values of μ between 6 and 34 within 2 standard deviations of the distribution, we can keep ζ_0 = 1/7^2 = 1/49. 
@@ -40,8 +42,11 @@ Figure above shows that the majority of the ACPL values lie between 0 and 50. Fi
 smaller sample sizes.
 
 Just like above, we model the problem as follows:
+
 μ   ~ N(μ_0, 1/ζ_0)
+
 ζ_b ~ N(a_0, b_0)
+
 ζ_w ~ Gamma(α, β)
 
 μ represents the population mean of the ACPL scores. 1/ζ_b represents the variance between scores of different players. 1/ζ_w represents the variance between the scores of any player. 
