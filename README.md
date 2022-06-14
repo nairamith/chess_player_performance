@@ -1,7 +1,7 @@
 
-<font size=10> Modelling Chess Player Performances</font>
+<font size=10>  Modelling Chess Player Performances</font>
 
-##Comparing Performance of Anand Viswanathan and Magnus Carlsen:
+<font size=5> Comparing Performance of Anand Viswanathan and Magnus Carlsen:</font>
 
 Figure below shows the box plot of the ACPL of the two players. The mean of the ACPL scores of Anand, Vishwanathan is 14.15 while the mean of the ACPL scores of Carlsen, Magnus is 10.7. Hence the difference between the average of the ACPL scores of the two people is 3.45 suggesting that the mean of Anand’s ACPL is higher than Carlsen’s. However, there is a possibility that if we don’t consider some of the high ACPL games of Anand or the low ACPL games of Carlsen in the sample, the results might be completely different. Running a T-test on the average scores with the null hypothesis that the mean ACPL is 0, we get a t-score of 1.9494 which has a p-value of 0.05514. This suggests that ACPL of both these players come from the same distribution. However, the box plot reveals something different. We will use Bayesian Analysis to obtain more information on this
 
@@ -24,7 +24,7 @@ We keep δ_0 = 0 to not bias the results in favor of anyone. The maximum score i
 
 Using the Gibbs sampler for 5000 iterations we get the results shown in Figure above. As can be seen the value of the population mean lies between 11 and 14. The value of δ lies between 0 and 4. Since we started with a prior distribution of  δ_0 = 0, the posterior distribution evidently shows that there is a positive difference between the ACPL means of Anand, Vishwanathan and Carlsen, Magnus. Hence we can conclude that Carlsen, Magnus is a better player than Anand, Vishwanathan by a value of 0 to 8(2* δ).
 
-##Comparing all players
+<font size=5> Comparing all players</font>
 
 ![./images/img_5.png](./images/img_4.png)
 
@@ -69,7 +69,7 @@ It can be seen that for players with a smaller sample size, the average ACPL sco
 From the box plot above, Karjakin, Sergey has lowest mean ACPL values. Carlsen, Magnus is ranked second. However the variance of Karjakin’s average ACPL is more than Carlsen showing more certainty about Carlsen’s ACPL. Chigorin, Mikhail has the highest average ACPL values showing that he is the most inferior among the given players.
 
 
-##Modelling Player Performances over the years:
+<font size=5> Modelling Player Performances over the years:</font>
 
 **Data Preparation:**
 
