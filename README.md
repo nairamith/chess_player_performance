@@ -1,5 +1,7 @@
 
-Comparing Performance of Anand Viswanathan and Magnus Carlsen:
+<font size=10> Modelling Chess Player Performances</font>
+
+##Comparing Performance of Anand Viswanathan and Magnus Carlsen:
 
 Figure below shows the box plot of the ACPL of the two players. The mean of the ACPL scores of Anand, Vishwanathan is 14.15 while the mean of the ACPL scores of Carlsen, Magnus is 10.7. Hence the difference between the average of the ACPL scores of the two people is 3.45 suggesting that the mean of Anand’s ACPL is higher than Carlsen’s. However, there is a possibility that if we don’t consider some of the high ACPL games of Anand or the low ACPL games of Carlsen in the sample, the results might be completely different. Running a T-test on the average scores with the null hypothesis that the mean ACPL is 0, we get a t-score of 1.9494 which has a p-value of 0.05514. This suggests that ACPL of both these players come from the same distribution. However, the box plot reveals something different. We will use Bayesian Analysis to obtain more information on this
 
@@ -22,7 +24,7 @@ We keep δ_0 = 0 to not bias the results in favor of anyone. The maximum score i
 
 Using the Gibbs sampler for 5000 iterations we get the results shown in Figure above. As can be seen the value of the population mean lies between 11 and 14. The value of δ lies between 0 and 4. Since we started with a prior distribution of  δ_0 = 0, the posterior distribution evidently shows that there is a positive difference between the ACPL means of Anand, Vishwanathan and Carlsen, Magnus. Hence we can conclude that Carlsen, Magnus is a better player than Anand, Vishwanathan by a value of 0 to 8(2* δ).
 
-Comparing all players
+##Comparing all players
 
 ![./images/img_5.png](./images/img_4.png)
 
@@ -67,13 +69,13 @@ It can be seen that for players with a smaller sample size, the average ACPL sco
 From the box plot above, Karjakin, Sergey has lowest mean ACPL values. Carlsen, Magnus is ranked second. However the variance of Karjakin’s average ACPL is more than Carlsen showing more certainty about Carlsen’s ACPL. Chigorin, Mikhail has the highest average ACPL values showing that he is the most inferior among the given players.
 
 
-Modelling Player Performances over the years:
+##Modelling Player Performances over the years:
 
-Data Preparation:
+**Data Preparation:**
 
 Initially, we start with analyzing the data. Of all the columns in the data, the only columns which would potentially be of use are Black.Player, Black.ACPL, White.Player, White.ACPL, Year, and PreDeepBlue. ACPL at any step of the game only depends on the current state of the game. Hence there is no special advantage or disadvantage for a white or black player. Since we are trying to model overall player improvement, we will be considering both Black and White player performances. For this, we will extract two dataframes containing the columns Player, Year, ACPL and PreDeepBlue separately for black and white and then perform a union all operation using the rbind functionality in R. Thus, we have one combined dataframe for both type of players with the columns Player, Year, ACPL and PreDeepBlue. I have then scaled the columns Year and ACPL so that they have a mean of 0 and variance of 1. This is done to stabilize the linear algebra that will be used. The Player column is coded as a factor column. In a particular year, a player plays more than 1 game. Hence, I have taken a mean of the ACPL scores of all the games played by a player in a year. 
 
-Data Analysis:
+**Data Analysis:**
 
 ![./images/img_11.png](./images/img_11.png)
 
@@ -88,12 +90,12 @@ Figure above shows that the ACPL scores are majorly concentrated in the 4 to 55 
 Figure above shows the boxplot of the ACPL score before 1996 and after 1996. As can be seen there is a significant difference. However, we cannot infer that there is an improvement in the performance due to the chess engine from this, since the difference could be the result of the ACPL score gradually decreasing over time.                   
 
 
-Applying Linear Regression:
+**Applying Linear Regression:**
 
 Approach Overview:
 The approach that I have followed for this problem is to start with a simple model using frequentist and Bayesian approaches and then gradually increase complexity by introducing more parameters. Once the model parameters are obtained, the AIC scores and R-squared value of the model will be compared with the previous model. After we have considered all the parameters, we will using Logistic Regression with Lasso to shrink and remove some of the parameters.
 
-Model 1:
+**Model 1:**
 
 y=β_0 + β_1*PreDeepBlue
 
@@ -126,7 +128,7 @@ Bayesian Approach:
 
 As can be seen from the density plot of the coefficient of PreDeepBlue, the value ranges between 0.2 and 1.0 showing that there is positive difference between the average ACPL before and after 1996. This tells us that there is an actual improvement in average player performance over the years. 
 
-Model 2:
+**Model 2:**
 
 y=β_0 + β_2*Year
 
@@ -150,7 +152,7 @@ Bayesian Approach:
 ![./images/img_18.png](./images/img_18.png)
 ![./images/img_19.png](./images/img_19.png)
 
-Model 3:
+**Model 3:**
 
 The ACPL is a score generated by comparing the performance of the moves played by a human with a computer. If the moves played by a human and the computer algorithm are the same, then the ACPL score would be 0. It is established in the earlier models that the average scores decrease. Intuitively speaking we need a relationship of the ACPL scores with Year in such a manner than the drop in ACPL decreases over time and after a point reached a plateau. The negative exponential decay function can capture such type of a relationship. I will test this hypothesis in the next model.
 
@@ -178,7 +180,7 @@ Bayesian Approach:
 
 The value of β_2 ranges between 0.7 and 1.1.  This shows that the average ACPL scores does decrease as the years go.
 
-Model 4:
+**Model 4:**
 
 Combining Model 1 and Model 3, we get:
 
@@ -209,7 +211,7 @@ As can be seen from the AIC scores of Models 3 and 4, the PreDeepBlue flag did n
 Apart from modelling the average player performance, we also need to factor in the individual player performances. It could be a possibility that some of the few players influenced the trend by their extreme performances(good/bad). Factoring in the performance of individual players will help us separate the average general player performance from the individual performances. This could help us in understanding the trend of ACPL scores vs time and enables us to see how individual players performed with respect to the average player performances during their times.
 
 
-Model with individual player performance factored in:
+**Model with individual player performance factored in:**
 
 y=β_0 + β_2*exp(-θ*Year) + (β_3 ) ⃗.(Player) ⃗
 
